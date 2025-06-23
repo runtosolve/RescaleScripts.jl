@@ -1,0 +1,11 @@
+name = "RescaleScripts"
+uuid = "38d688ed-b352-4089-95be-06ce88699eb3"
+authors = ["Cris Moen <cris.moen@runtosolve.com>"]
+version = "0.1.0"
+
+[deps]
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+ReadWriteFind = "6e1ff3fe-52ba-4718-9baa-43b124cc059a"
+
+[compat]
+Printf = "1.11.0"
