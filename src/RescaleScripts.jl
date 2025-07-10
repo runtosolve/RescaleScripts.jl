@@ -2,7 +2,7 @@ module RescaleScripts
 
 using ReadWriteFind, Printf
 
-function generate_cli_script(job_name, analysis_type, analysis_version, core_type, number_of_cores, wall_time, port_number, license_server, remote_working_directory, model_calls, local_working_directory, bash_filename)
+function generate_cli_script(job_name, analysis_type, analysis_version, core_type, number_of_cores, wall_time, port_number, license_server, remote_working_directory, model_names, local_working_directory, bash_filename, cpus)
 
     lines = []
 
@@ -32,12 +32,10 @@ function generate_cli_script(job_name, analysis_type, analysis_version, core_typ
     line = @sprintf "cd %s" remote_working_directory
     push!(lines, line)
 
-    for i in eachindex(model_calls)
-
-        push!(lines, model_calls[i])
-
+    for i in eachindex(model_names)
+        line = "abaqus job=" * model_names[i] * " cpus=$cpus" * " interactive"
+        push!(lines, line)
     end
-
 
     ReadWriteFind.write_file(joinpath(local_working_directory, bash_filename), lines)
 
