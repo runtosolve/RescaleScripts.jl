@@ -2,7 +2,7 @@ module RescaleScripts
 
 using ReadWriteFind, Printf
 
-function generate_cli_script(job_name, analysis_type, analysis_version, core_type, number_of_cores, wall_time, port_number, license_server, remote_working_directory, model_names, local_working_directory, bash_filename, cpus, num_tokens)
+function generate_cli_script(job_name, project_name, analysis_type, analysis_version, core_type, number_of_cores, wall_time, port_number, license_server, remote_working_directory, model_names, local_working_directory, bash_filename, cpus, num_tokens)
 
     lines = []
 
@@ -18,6 +18,9 @@ function generate_cli_script(job_name, analysis_type, analysis_version, core_typ
     push!(lines, line)
 
     line = @sprintf "#RESCALE_USER_DEFINED_LICENSE_SETTINGS={\"featureSets\":[{\"name\":\"USER_SPECIFIED\",\"features\":[{\"name\":\"abaqus\",\"count\":%d}]}]}}]}" num_tokens
+    push!(lines, line)
+
+    line = @sprintf "#RESCALE_PROJECT_ID=%s" project_name
     push!(lines, line)
 
     line = @sprintf "#RESCALE_CORE_TYPE=%s" core_type
