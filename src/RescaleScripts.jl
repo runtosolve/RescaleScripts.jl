@@ -50,7 +50,7 @@ end
 
 
 
-function generate_cli_script(job_name, analysis_type, analysis_version, core_type, number_of_cores, wall_time, port_number, license_server, remote_working_directory, model_names, local_working_directory, bash_filename, cpus, uel_filename, num_tokens)
+function generate_cli_script(job_name, project_name, analysis_type, analysis_version, core_type, number_of_cores, wall_time, port_number, license_server, remote_working_directory, model_names, local_working_directory, bash_filename, cpus, uel_filename, num_tokens)
 
     lines = []
 
@@ -58,7 +58,10 @@ function generate_cli_script(job_name, analysis_type, analysis_version, core_typ
 
     line = @sprintf """#RESCALE_NAME="%s\"""" job_name
     push!(lines, line)
-    
+
+    line = @sprintf "#RESCALE_PROJECT_ID=%s" project_name
+    push!(lines, line)
+
     line = @sprintf "#RESCALE_ANALYSIS=%s" analysis_type
     push!(lines, line)
 
